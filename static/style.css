@@ -1,0 +1,202 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* No scrolling */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background Video */
+#bg-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: -3;
+}
+
+/* Blur + Gradient Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    background: linear-gradient(
+        120deg,
+        rgba(0, 0, 0, 0.55),
+        rgba(0, 0, 0, 0.20)
+    );
+    z-index: -2;
+}
+
+/* Particle Effect */
+#particles {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    background-image: url("https://i.imgur.com/LPuA5nD.png");
+    animation: float 13s linear infinite;
+    opacity: 0.45;
+    z-index: -1;
+}
+
+@keyframes float {
+    from { background-position: 0 0; }
+    to { background-position: 800px 800px; }
+}
+
+/* Main card */
+.container {
+    width: 90%;
+    max-width: 460px;
+    background: rgba(255, 255, 255, 0.96);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 0 28px rgba(0, 0, 0, 0.55);
+    text-align: center;
+    animation: fadeUp 0.9s ease;
+}
+
+@keyframes fadeUp {
+    0%   { opacity: 0; transform: translateY(28px); }
+    100% { opacity: 1; transform: translateY(0px); }
+}
+
+/* Heading */
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form */
+form {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+input {
+    padding: 11px;
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+}
+
+/* Button Glow Hover */
+button {
+    padding: 11px 18px;
+    background-color: #0078ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: 0.25s;
+}
+
+button:hover {
+    background-color: #005fd1;
+    box-shadow: 0 0 10px rgba(0, 120, 255, 0.75);
+    transform: translateY(-1px);
+}
+
+/* Stock data card */
+.card {
+    margin-top: 18px;
+    padding: 20px;
+    text-align: left;
+    border-radius: 12px;
+    background-color: #eef3ff;
+    animation: fadeUp 0.8s ease;
+}
+
+/* Price indicator colors */
+.change.up {
+    color: #00c853;
+    font-weight: 600;
+}
+
+.change.down {
+    color: #ff5252;
+    font-weight: 600;
+}
+
+/* Error */
+.error {
+    color: #ff4d4d;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+/* Error list */
+.error-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 8px 0 0 0;
+}
+
+/* Comparison table */
+.table-title {
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    text-align: left;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;   /* horizontal scroll only if lots of columns */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+th, td {
+    padding: 6px 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    font-weight: 600;
+}
+
+/* Right-align numeric columns a bit */
+td:nth-child(3),
+td:nth-child(4),
+td:nth-child(5),
+td:nth-child(6),
+td:nth-child(7),
+td:nth-child(8),
+td:nth-child(9),
+td:nth-child(10) {
+    text-align: right;
+}

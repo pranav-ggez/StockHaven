@@ -1,0 +1,15 @@
+open the python file
+
+go to the terminal and type "python app.py"
+
+then click "go live" on vscode to run the frontend
+
+-----------------------------------------------------
+
+Supported Yfinance Stocks - https://finance.yahoo.com/lookup/
+
+-----------------------------------------------------
+
+templates folder - html file
+static folder - css file
+root folder - app.py

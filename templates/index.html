@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Info Fetcher</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='stockhaven-favicon.png') }}">
+
+</head>
+<body>
+    <!-- Background Video -->
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="{{ url_for('static', filename='videoplayback.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Blur / gradient overlay -->
+    <div class="overlay"></div>
+
+    <!-- Optional particle layer (only if styled in CSS) -->
+    <div id="particles"></div>
+
+    <!-- Main content card -->
+    <div class="container">
+        <h1>StockHaven's Stock Info Fetcher</h1>
+
+        <form method="POST">
+            <input
+                type="text"
+                name="company"
+                placeholder="Enter symbol(s) e.g. AAPL or AAPL, MSFT, TSLA"
+                required
+            >
+            <button type="submit">Fetch</button>
+        </form>
+
+        {% if errors %}
+        <ul class="error-list">
+            {% for e in errors %}
+            <li class="error">{{ e }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <!-- Detailed view for the first valid stock -->
+        {% if primary_stock %}
+        <div class="card">
+            <h2>{{ primary_stock.name }} ({{ primary_stock.symbol }})</h2>
+
+            <p><strong>Current Price (INR):</strong>
+                {% if primary_stock.price_inr is not none %}
+                    ₹ {{ primary_stock.price_inr | round(2) }}
+                {% elif primary_stock.price is not none %}
+                    {{ primary_stock.price }} {{ primary_stock.currency }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </p>
+
+            <p><strong>Change:</strong>
+                {% if primary_stock.change is not none %}
+                    <span class="change
+                          {% if primary_stock.change > 0 %}up{% elif primary_stock.change < 0 %}down{% endif %}">
+                        {% if primary_stock.change > 0 %}▲{% elif primary_stock.change < 0 %}▼{% endif %}
+
+                        {% if primary_stock.change_inr is not none %}
+                            ₹ {{ primary_stock.change_inr | round(2) }}
+                        {% else %}
+                            {{ primary_stock.change | round(2) }} {{ primary_stock.currency }}
+                        {% endif %}
+
+                        ({{ primary_stock.changePercent | round(2) }}%)
+                    </span>
+                {% else %}
+                    N/A
+                {% endif %}
+            </p>
+
+            <p><strong>Previous Close (INR):</strong>
+                {% if primary_stock.previousClose_inr is not none %}
+                    ₹ {{ primary_stock.previousClose_inr | round(2) }}
+                {% elif primary_stock.previousClose is not none %}
+                    {{ primary_stock.previousClose }} {{ primary_stock.currency }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </p>
+
+            <p><strong>Open (INR):</strong>
+                {% if primary_stock.open_inr is not none %}
+                    ₹ {{ primary_stock.open_inr | round(2) }}
+                {% elif primary_stock.open is not none %}
+                    {{ primary_stock.open }} {{ primary_stock.currency }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </p>
+
+            <p><strong>Day Range (INR):</strong>
+                {% if primary_stock.dayLow_inr is not none and primary_stock.dayHigh_inr is not none %}
+                    ₹ {{ primary_stock.dayLow_inr | round(2) }} – ₹ {{ primary_stock.dayHigh_inr | round(2) }}
+                {% elif primary_stock.dayLow is not none and primary_stock.dayHigh is not none %}
+                    {{ primary_stock.dayLow }} – {{ primary_stock.dayHigh }} {{ primary_stock.currency }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </p>
+
+            <p><strong>Market Cap (INR):</strong>
+                {% if primary_stock.marketCap_inr is not none %}
+                    ₹ {{ primary_stock.marketCap_inr | round(2) }}
+                {% elif primary_stock.marketCap is not none %}
+                    {{ primary_stock.marketCap }} {{ primary_stock.currency }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </p>
+
+            <p><em>Original currency: {{ primary_stock.currency }}</em></p>
+        </div>
+        {% endif %}
+
+        <!-- Comparison table for all valid stocks -->
+        {% if stocks %}
+        <h3 class="table-title">Stock Comparison (All INR where possible)</h3>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Name</th>
+                        <th>Price (INR)</th>
+                        <th>Change (INR)</th>
+                        <th>% Change</th>
+                        <th>Market Cap (INR)</th>
+                        <th>Open (INR)</th>
+                        <th>Prev Close (INR)</th>
+                        <th>Day High (INR)</th>
+                        <th>Day Low (INR)</th>
+                        <th>Currency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in stocks %}
+                    <tr>
+                        <td>{{ s.symbol }}</td>
+                        <td>{{ s.name }}</td>
+
+                        <!-- Price -->
+                        <td>
+                            {% if s.price_inr is not none %}
+                                ₹ {{ s.price_inr | round(2) }}
+                            {% elif s.price is not none %}
+                                {{ s.price }} {{ s.currency }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+
+                        <!-- Change -->
+                        <td>
+                            {% if s.change is not none %}
+                                <span class="change
+                                      {% if s.change > 0 %}up{% elif s.change < 0 %}down{% endif %}">
+                                    {% if s.change > 0 %}▲{% elif s.change < 0 %}▼{% endif %}
+
+                                    {% if s.change_inr is not none %}
+                                        ₹ {{ s.change_inr | round(2) }}
+                                    {% else %}
+                                        {{ s.change | round(2) }} {{ s.currency }}
+                                    {% endif %}
+                                </span>
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+
+                        <!-- % Change -->
+                        <td>
+                            {% if s.changePercent is not none %}
+                                {{ s.changePercent | round(2) }}%
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+
+                        <!-- Market Cap -->
+                        <td>
+                            {% if s.marketCap_inr is not none %}
+                                ₹ {{ s.marketCap_inr | round(2) }}
+                            {% elif s.marketCap is not none %}
+                                {{ s.marketCap }} {{ s.currency }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+
+                        <!-- Open -->
+                        <td>
+                            {% if s.open_inr is not none %}
+                                ₹ {{ s.open_inr | round(2) }}
+                            {% elif s.open is not none %}
+                                {{ s.open }} {{ s.currency }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+
+                        <!-- Previous Close -->
+                        <td>
+                            {% if s.previousClose_inr is not none %}
+                                ₹ {{ s.previousClose_inr | round(2) }}
+                            {% elif s.previousClose is not none %}
+                                {{ s.previousClose }} {{ s.currency }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+
+                        <!-- Day High -->
+                        <td>
+                            {% if s.dayHigh_inr is not none %}
+                                ₹ {{ s.dayHigh_inr | round(2) }}
+                            {% elif s.dayHigh is not none %}
+                                {{ s.dayHigh }} {{ s.currency }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+
+                        <!-- Day Low -->
+                        <td>
+                            {% if s.dayLow_inr is not none %}
+                                ₹ {{ s.dayLow_inr | round(2) }}
+                            {% elif s.dayLow is not none %}
+                                {{ s.dayLow }} {{ s.currency }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+
+                        <!-- Original currency info -->
+                        <td>{{ s.currency }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
