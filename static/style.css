@@ -8,7 +8,7 @@ html, body {
     height: 100%;
 }
 
-/* No scrolling */
+
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -19,7 +19,7 @@ body {
     overflow: hidden;
 }
 
-/* Background Video */
+
 #bg-video {
     position: fixed;
     top: 50%;
@@ -33,7 +33,7 @@ body {
     z-index: -3;
 }
 
-/* Blur + Gradient Overlay */
+
 .overlay {
     position: fixed;
     top: 0;
@@ -50,7 +50,7 @@ body {
     z-index: -2;
 }
 
-/* Particle Effect */
+
 #particles {
     position: fixed;
     width: 100vw;
@@ -67,7 +67,7 @@ body {
     to { background-position: 800px 800px; }
 }
 
-/* Main card */
+
 .container {
     width: 90%;
     max-width: 460px;
@@ -84,13 +84,13 @@ body {
     100% { opacity: 1; transform: translateY(0px); }
 }
 
-/* Heading */
+
 h1 {
     color: #333;
     margin-bottom: 20px;
 }
 
-/* Form */
+
 form {
     display: flex;
     justify-content: center;
@@ -106,7 +106,7 @@ input {
     outline: none;
 }
 
-/* Button Glow Hover */
+
 button {
     padding: 11px 18px;
     background-color: #0078ff;
@@ -125,7 +125,7 @@ button:hover {
     transform: translateY(-1px);
 }
 
-/* Stock data card */
+
 .card {
     margin-top: 18px;
     padding: 20px;
@@ -135,7 +135,7 @@ button:hover {
     animation: fadeUp 0.8s ease;
 }
 
-/* Price indicator colors */
+
 .change.up {
     color: #00c853;
     font-weight: 600;
@@ -146,21 +146,20 @@ button:hover {
     font-weight: 600;
 }
 
-/* Error */
 .error {
     color: #ff4d4d;
     margin-top: 10px;
     font-weight: 600;
 }
 
-/* Error list */
+
 .error-list {
     list-style: none;
     padding-left: 0;
     margin: 8px 0 0 0;
 }
 
-/* Comparison table */
+
 .table-title {
     margin-top: 20px;
     margin-bottom: 8px;
@@ -170,7 +169,7 @@ button:hover {
 
 .table-wrapper {
     width: 100%;
-    overflow-x: auto;   /* horizontal scroll only if lots of columns */
+    overflow-x: auto;  
 }
 
 table {
@@ -189,7 +188,7 @@ th {
     font-weight: 600;
 }
 
-/* Right-align numeric columns a bit */
+
 td:nth-child(3),
 td:nth-child(4),
 td:nth-child(5),
