@@ -5,10 +5,10 @@
     <title>Stock Info Fetcher</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='stockhaven-favicon.png') }}">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-   
+    
     <video autoplay muted loop playsinline id="bg-video">
         <source src="{{ url_for('static', filename='videoplayback.mp4') }}" type="video/mp4">
         Your browser does not support the video tag.
@@ -17,8 +17,6 @@
    
     <div class="overlay"></div>
 
-    
-    <div id="particles"></div>
 
     
     <div class="container">
@@ -42,7 +40,7 @@
         </ul>
         {% endif %}
 
-       
+        
         {% if primary_stock %}
         <div class="card">
             <h2>{{ primary_stock.name }} ({{ primary_stock.symbol }})</h2>
@@ -146,7 +144,7 @@
                         <td>{{ s.symbol }}</td>
                         <td>{{ s.name }}</td>
 
-                    
+                      
                         <td>
                             {% if s.price_inr is not none %}
                                 ₹ {{ s.price_inr | round(2) }}
@@ -157,7 +155,7 @@
                             {% endif %}
                         </td>
 
-                     
+                       
                         <td>
                             {% if s.change is not none %}
                                 <span class="change
@@ -175,7 +173,7 @@
                             {% endif %}
                         </td>
 
-                      
+                        
                         <td>
                             {% if s.changePercent is not none %}
                                 {{ s.changePercent | round(2) }}%
@@ -184,7 +182,7 @@
                             {% endif %}
                         </td>
 
-                      
+                       
                         <td>
                             {% if s.marketCap_inr is not none %}
                                 ₹ {{ s.marketCap_inr | round(2) }}
@@ -206,7 +204,7 @@
                             {% endif %}
                         </td>
 
-                        
+                      
                         <td>
                             {% if s.previousClose_inr is not none %}
                                 ₹ {{ s.previousClose_inr | round(2) }}
@@ -217,7 +215,7 @@
                             {% endif %}
                         </td>
 
-                        
+                     
                         <td>
                             {% if s.dayHigh_inr is not none %}
                                 ₹ {{ s.dayHigh_inr | round(2) }}
@@ -228,7 +226,7 @@
                             {% endif %}
                         </td>
 
-                    
+                      
                         <td>
                             {% if s.dayLow_inr is not none %}
                                 ₹ {{ s.dayLow_inr | round(2) }}
@@ -239,7 +237,7 @@
                             {% endif %}
                         </td>
 
-                     
+                       
                         <td>{{ s.currency }}</td>
                     </tr>
                     {% endfor %}
