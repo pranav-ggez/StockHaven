@@ -185,7 +185,11 @@ td:nth-child(7),
 td:nth-child(8),
 td:nth-child(9),
 td:nth-child(10) {
+<<<<<<< HEAD
     text-align: right;
+=======
+text-align: right;
+>>>>>>> 87d35b4d686ba401422d1cc51c9c027048185338
 }
 
 @media (max-width: 768px) {
