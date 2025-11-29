@@ -14,16 +14,8 @@
         Your browser does not support the video tag.
     </video>
 
-<<<<<<< HEAD
     <div class="overlay"></div>
-
-=======
-   
     <div class="overlay"></div>
-
-
-    
->>>>>>> 87d35b4d686ba401422d1cc51c9c027048185338
     <div class="container">
         <h1>StockHaven's Stock Info Fetcher</h1>
 
@@ -45,10 +37,7 @@
         </ul>
         {% endif %}
 
-<<<<<<< HEAD
-=======
         
->>>>>>> 87d35b4d686ba401422d1cc51c9c027048185338
         {% if primary_stock %}
         <div class="card">
             <h2>{{ primary_stock.name }} ({{ primary_stock.symbol }})</h2>
@@ -74,10 +63,7 @@
                         {% else %}
                             {{ primary_stock.change | round(2) }} {{ primary_stock.currency }}
                         {% endif %}
-<<<<<<< HEAD
-=======
 
->>>>>>> 87d35b4d686ba401422d1cc51c9c027048185338
                         ({{ primary_stock.changePercent | round(2) }}%)
                     </span>
                 {% else %}
@@ -127,7 +113,7 @@
 
             <p><em>Original currency: {{ primary_stock.currency }}</em></p>
         </div>
-<<<<<<< HEAD
+
 
         {% if chart %}
         <div style="margin-top: 20px;">
@@ -136,11 +122,6 @@
         {% endif %}
         {% endif %}
 
-=======
-        {% endif %}
-
-       
->>>>>>> 87d35b4d686ba401422d1cc51c9c027048185338
         {% if stocks %}
         <h3 class="table-title">Stock Comparison (All INR where possible)</h3>
         <div class="table-wrapper">
@@ -166,10 +147,7 @@
                         <td>{{ s.symbol }}</td>
                         <td>{{ s.name }}</td>
 
-<<<<<<< HEAD
-=======
                       
->>>>>>> 87d35b4d686ba401422d1cc51c9c027048185338
                         <td>
                             {% if s.price_inr is not none %}
                                 ₹ {{ s.price_inr | round(2) }}
@@ -180,10 +158,7 @@
                             {% endif %}
                         </td>
 
-<<<<<<< HEAD
-=======
                        
->>>>>>> 87d35b4d686ba401422d1cc51c9c027048185338
                         <td>
                             {% if s.change is not none %}
                                 <span class="change
@@ -201,10 +176,7 @@
                             {% endif %}
                         </td>
 
-<<<<<<< HEAD
-=======
                         
->>>>>>> 87d35b4d686ba401422d1cc51c9c027048185338
                         <td>
                             {% if s.changePercent is not none %}
                                 {{ s.changePercent | round(2) }}%
@@ -213,10 +185,7 @@
                             {% endif %}
                         </td>
 
-<<<<<<< HEAD
-=======
                        
->>>>>>> 87d35b4d686ba401422d1cc51c9c027048185338
                         <td>
                             {% if s.marketCap_inr is not none %}
                                 ₹ {{ s.marketCap_inr | round(2) }}
@@ -227,10 +196,7 @@
                             {% endif %}
                         </td>
 
-<<<<<<< HEAD
-=======
                         
->>>>>>> 87d35b4d686ba401422d1cc51c9c027048185338
                         <td>
                             {% if s.open_inr is not none %}
                                 ₹ {{ s.open_inr | round(2) }}
@@ -241,10 +207,7 @@
                             {% endif %}
                         </td>
 
-<<<<<<< HEAD
-=======
                       
->>>>>>> 87d35b4d686ba401422d1cc51c9c027048185338
                         <td>
                             {% if s.previousClose_inr is not none %}
                                 ₹ {{ s.previousClose_inr | round(2) }}
@@ -255,10 +218,7 @@
                             {% endif %}
                         </td>
 
-<<<<<<< HEAD
-=======
                      
->>>>>>> 87d35b4d686ba401422d1cc51c9c027048185338
                         <td>
                             {% if s.dayHigh_inr is not none %}
                                 ₹ {{ s.dayHigh_inr | round(2) }}
@@ -269,10 +229,7 @@
                             {% endif %}
                         </td>
 
-<<<<<<< HEAD
-=======
                       
->>>>>>> 87d35b4d686ba401422d1cc51c9c027048185338
                         <td>
                             {% if s.dayLow_inr is not none %}
                                 ₹ {{ s.dayLow_inr | round(2) }}
@@ -283,10 +240,7 @@
                             {% endif %}
                         </td>
 
-<<<<<<< HEAD
-=======
                        
->>>>>>> 87d35b4d686ba401422d1cc51c9c027048185338
                         <td>{{ s.currency }}</td>
                     </tr>
                     {% endfor %}
